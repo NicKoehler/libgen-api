@@ -1,12 +1,12 @@
 import setuptools
 
-with open("README.md", "r") as fh:
+with open("README.md", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
     name="libgen_api",
     packages=["libgen_api"],
-    version="1.0.0",
+    version="1.1.0",
     description="Search Library genesis by Title or Author",
     long_description_content_type="text/markdown",
     long_description=long_description,
@@ -21,6 +21,11 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3",
     ],
-    keywords=["libgen search", "libgen api", "search libgen", "search library genesis"],
+    keywords=[
+        "libgen search",
+        "libgen api",
+        "search libgen",
+        "search library genesis",
+    ],
     install_requires=["bs4", "requests", "lxml"],
 )

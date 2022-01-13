@@ -14,21 +14,21 @@ from bs4 import BeautifulSoup
 class SearchRequest:
 
     col_names = [
-        "ID",
-        "Author",
-        "Title",
-        "Publisher",
-        "Year",
-        "Pages",
-        "Language",
-        "Size",
-        "Extension",
-        "Mirror_1",
-        "Mirror_2",
-        "Mirror_3",
-        "Mirror_4",
-        "Mirror_5",
-        "Edit",
+        "id",
+        "author",
+        "title",
+        "publisher",
+        "year",
+        "pages",
+        "language",
+        "size",
+        "extension",
+        "mirror_1",
+        "mirror_2",
+        "mirror_3",
+        "mirror_4",
+        "mirror_5",
+        "edit",
     ]
 
     def __init__(self, query, search_type="title"):

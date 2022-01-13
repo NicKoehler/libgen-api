@@ -2,10 +2,11 @@
 
 ![logo](logo.png)
 
-![PyPI - Downloads](https://img.shields.io/pypi/dm/libgen-api?style=plastic)
-![GitHub](https://img.shields.io/github/license/harrison-broadbent/libgen-api?style=plastic)
-![PyPI](https://img.shields.io/pypi/v/libgen-api?style=plastic)
-![GitHub Repo stars](https://img.shields.io/github/stars/harrison-broadbent/libgen-api?style=plastic)
+A fork of the original [libgen-api](https://github.com/nickoehler/libgen-api)
+
+![GitHub](https://img.shields.io/github/license/nickoehler/libgen-api?style=plastic)
+
+![GitHub Repo stars](https://img.shields.io/github/stars/nickoehler/libgen-api?style=plastic)
 
 </div>
 
@@ -39,7 +40,7 @@ Please ⭐ if you find this useful!
 Install the package -
 
 ```
-pip install libgen-api
+pip install https://github.com/nickoehler/libgen-api
 ```
 
 Perform a basic search -
@@ -47,9 +48,9 @@ Perform a basic search -
 ```python
 # search_title()
 
-from libgen_api import LibgenSearch
-s = LibgenSearch()
-results = s.search_title("Pride and Prejudice")
+from libgen_api import Libgen
+
+results = Libgen.search_title("Pride and Prejudice")
 print(results)
 ```
 
@@ -64,22 +65,18 @@ Search by title or author:
 ### Title:
 
 ```python
-# search_title()
+from libgen_api import Libgen
 
-from libgen_api import LibgenSearch
-s = LibgenSearch()
-results = s.search_title("Pride and Prejudice")
+results = Libgen.search_title("Pride and Prejudice")
 print(results)
 ```
 
 ### Author:
 
 ```python
-# search_author()
+from libgen_api import Libgen
 
-from libgen_api import LibgenSearch
-s = LibgenSearch()
-results = s.search_author("Jane Austen")
+results = Libgen.search_author("Jane Austen")
 print(results)
 ```
 
@@ -94,41 +91,34 @@ Skip to the [Examples](#filtered-title-searching)
 ### Filtered Title Searching
 
 ```python
-# search_title_filtered()
+from libgen_api import Libgen
 
-from libgen_api import LibgenSearch
-
-tf = LibgenSearch()
-title_filters = {"Year": "2007", "Extension": "epub"}
-titles = tf.search_title_filtered("Pride and Prejudice", title_filters, exact_match=True)
+tf = Libgen()
+title_filters = {"year": "2007", "extension": "epub"}
+titles = tLibgen.search_title("Pride and Prejudice", title_filters, exact_match=True)
 print(titles)
 ```
 
 ### Filtered Author Searching
 
 ```python
-# search_author_filtered()
+from libgen_api import Libgen
 
-from libgen_api import LibgenSearch
-
-af = LibgenSearch()
-author_filters = {"Language": "German", "Year": "2009"}
-titles = af.search_author_filtered("Agatha Christie", author_filters, exact_match=True)
+af = Libgen()
+author_filters = {"language": "German", "year": "2009"}
+titles = aLibgen.search_author("Agatha Christie", author_filters, exact_match=True)
 print(titles)
 ```
 
 ### Non-exact Filtered Searching
 
 ```python
-# search_author_filtered(exact_match = False)
+from libgen_api import Libgen
 
-from libgen_api import LibgenSearch
-
-ne_af = LibgenSearch()
-partial_filters = {"Year": "200"}
-titles = ne_af.search_author_filtered("Agatha Christie", partial_filters, exact_match=False)
+ne_af = Libgen()
+partial_filters = {"year": "200"}
+titles = ne_aLibgen.search_author("Agatha Christie", partial_filters, exact_match=False)
 print(titles)
-
 ```
 
 ### Filter Fields
@@ -137,44 +127,40 @@ You can filter against any of the Library Genesis column names, which are given 
 
 ```python
 col_names = [
-        "ID",
-        "Author",
-        "Title",
-        "Publisher",
-        "Year",
-        "Pages",
-        "Language",
-        "Size",
-        "Extension",
-        "Mirror_1",
-        "Mirror_2",
-        "Mirror_3",
-        "Mirror_4",
-        "Mirror_5",
-        "Edit",
-    ]
+    "id",
+    "author",
+    "title",
+    "publisher",
+    "year",
+    "pages",
+    "language",
+    "size",
+    "extension",
+    "mirror_1",
+    "mirror_2",
+    "mirror_3",
+    "mirror_4",
+    "mirror_5",
+    "edit",
+]
 ```
 
 ## Resolving mirror links
 
 The mirror links returned in the results (ie. by running search_author() or search_title()) are not direct download links and do not resolve to a downloadable URL without further parsing.
 
-An additional method, `resolve_download_links()`, can be to resolve the mirror links of a search item into direct download links.
+You can call `get_download_links()` on a book object to get direct download links.
 
-The `Mirror_1` field is used by `resolve_download_links()` as the results generally contain the most useful URLs.
+The first element of `mirrors` field is used by `get_download_links()` as the results generally contain the most useful URLs.
 
-This method accepts a single result (type: dictionary) from the array of searched results, and
-returns a dictionary of all the download links for `Mirror_1` (each mirror link has up to 4 download links):
+returns a dictionary of all the download links of the first mirror (each mirror link has up to 4 download links):
 
 ```python
-# resolve_download_links()
+from libgen_api import Libgen
 
-from libgen_api import LibgenSearch
-
-s = LibgenSearch()
-results = s.search_author("Jane Austen")
+results = Libgen.search_author("Jane Austen")
 item_to_download = results[0]
-download_links = s.resolve_download_links(item_to_download)
+download_links = item_to_download.get_download_links()
 print(download_links)
 ```
 
@@ -189,34 +175,41 @@ Example output:
 }
 ```
 
+## Download a book
+
+If you just want the book file (ie. epub, mobi, pdf, etc.), you can call `download()` and then download the file directly.
+
+This method will return the file as bytes from Cloudflare link.
+
+```python
+from libgen_api import Libgen
+
+results = Libgen.search_author("Jane Austen")
+book = results[0]
+with open(f"{book.title}.{book.extension}", "wb") as f:
+    f.write(book.download())
+```
+
 ## More Examples
 
 See the [testing file](test/manualtesting.py) for more examples.
 
 ## Results Layout
 
-Results are returned as a list of dictionaries:
+Results are returned as a list of Book objects with the following attributes:
 
-```json
-[
-  {
-    "Author": "John Smith",
-    "Edit": "http://example.com",
-    "Extension": "epub",
-    "ID": "00000",
-    "Language": "German",
-    "Mirror_1": "http://example.com",
-    "Mirror_2": "http://example.com",
-    "Mirror_3": "http://example.com",
-    "Mirror_4": "http://example.com",
-    "Mirror_5": "http://example.com",
-    "Pages": "410",
-    "Publisher": "Publisher",
-    "Size": "1005 Kb",
-    "Title": "Title",
-    "Year": "2021"
-  }
-]
+```
+id: str,
+author: str,
+title: str,
+publisher: str,
+year: str,
+pages: str,
+language: str,
+size: str,
+extension: str,
+mirrors: list[str],
+edit: str,
 ```
 
 ## Further information
@@ -235,7 +228,7 @@ To run the tests -
 
 - ## Clone this repo -
   ```
-  git clone https://github.com/harrison-broadbent/libgen-api.git && cd libgen-api
+  git clone https://github.com/nickoehler/libgen-api.git && cd libgen-api
   ```
 - ## Install dependencies with -
   ```
@@ -254,4 +247,5 @@ Please don't hesitate to raise an issue, or fork this project and improve on it.
 
 Thanks to the following contributors -
 
+- [harrison broadbent](https://github.com/harrison-broadbent)
 - [calmoo](https://github.com/calmoo)
