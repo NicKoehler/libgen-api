@@ -41,7 +41,7 @@ Please ⭐ if you find this useful!
 Install the package -
 
 ```
-pip install https://github.com/nickoehler/libgen-api
+pip install git+https://github.com/nickoehler/libgen-api
 ```
 
 Perform a basic search -
