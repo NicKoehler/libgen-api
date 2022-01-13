@@ -94,7 +94,6 @@ Skip to the [Examples](#filtered-title-searching)
 ```python
 from libgen_api import Libgen
 
-tf = Libgen()
 title_filters = {"year": "2007", "extension": "epub"}
 titles = tLibgen.search_title("Pride and Prejudice", title_filters, exact_match=True)
 print(titles)
@@ -105,7 +104,6 @@ print(titles)
 ```python
 from libgen_api import Libgen
 
-af = Libgen()
 author_filters = {"language": "German", "year": "2009"}
 titles = aLibgen.search_author("Agatha Christie", author_filters, exact_match=True)
 print(titles)
@@ -116,7 +114,6 @@ print(titles)
 ```python
 from libgen_api import Libgen
 
-ne_af = Libgen()
 partial_filters = {"year": "200"}
 titles = ne_aLibgen.search_author("Agatha Christie", partial_filters, exact_match=False)
 print(titles)
@@ -124,26 +121,18 @@ print(titles)
 
 ### Filter Fields
 
-You can filter against any of the Library Genesis column names, which are given as -
+You can filter against this list of fields:
 
-```python
-col_names = [
-    "id",
-    "author",
-    "title",
-    "publisher",
-    "year",
-    "pages",
-    "language",
-    "size",
-    "extension",
-    "mirror_1",
-    "mirror_2",
-    "mirror_3",
-    "mirror_4",
-    "mirror_5",
-    "edit",
-]
+```
+id
+author
+titl
+publisher
+year
+pages
+language
+size
+extension
 ```
 
 ## Resolving mirror links
