@@ -24,6 +24,7 @@ Allows you to search Library Genesis by title or author, filter results, and res
   - [Non-exact Filtered Searching](#non-exact-filtered-searching)
   - [Filter Fields](#filter-fields)
 - [Resolving mirror links](#resolving-mirror-links)
+- [Download books](#Download-books)
 - [More Examples](#more-examples)
 - [Further Information](#further-information)
 - [Testing](#testing)
@@ -175,7 +176,7 @@ Example output:
 }
 ```
 
-## Download a book
+## Download books
 
 If you just want the book file (ie. epub, mobi, pdf, etc.), you can call `download()` and then download the file directly.
 
