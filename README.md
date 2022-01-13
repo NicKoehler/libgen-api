@@ -95,7 +95,7 @@ Skip to the [Examples](#filtered-title-searching)
 from libgen_api import Libgen
 
 title_filters = {"year": "2007", "extension": "epub"}
-titles = tLibgen.search_title("Pride and Prejudice", title_filters, exact_match=True)
+titles = Libgen.search_title("Pride and Prejudice", title_filters, exact_match=True)
 print(titles)
 ```
 
@@ -105,7 +105,7 @@ print(titles)
 from libgen_api import Libgen
 
 author_filters = {"language": "German", "year": "2009"}
-titles = aLibgen.search_author("Agatha Christie", author_filters, exact_match=True)
+titles = Libgen.search_author("Agatha Christie", author_filters, exact_match=True)
 print(titles)
 ```
 
@@ -115,7 +115,7 @@ print(titles)
 from libgen_api import Libgen
 
 partial_filters = {"year": "200"}
-titles = ne_aLibgen.search_author("Agatha Christie", partial_filters, exact_match=False)
+titles = Libgen.search_author("Agatha Christie", partial_filters, exact_match=False)
 print(titles)
 ```
 
