@@ -80,8 +80,8 @@ class TestBasicSearching:
         title_to_download = titles[0]
         dl_links = title_to_download.get_download_links()
 
-        # ensure each host is in the results and that they each have a url
-        assert (["GET", "Cloudflare", "IPFS.io", "Infura"] == list(dl_links.keys())) & (
+        # ensure each host is in the results and that they each have a url and the cover
+        assert (["GET", "Cloudflare", "IPFS.io", "Infura", "cover"] == list(dl_links.keys())) & (
             False not in [len(link) > 0 for key, link in dl_links.items()]
         )
 

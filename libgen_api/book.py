@@ -37,11 +37,26 @@ class Book():
     def get_download_links(self) -> dict[str:str]:
         """
         Get the download links for the book.
+        in this mirror also the book's cover url is present.
+
+        Returns:
+            A dictionary of download links and cover url.
+
+            Example:
+                {
+                    'GET':          'http://...',
+                    'Cloudflare':   'https://...',
+                    'IPFS.io':      'https://...',
+                    'Infura':       'https://...',
+
+                    'cover':        'https://...'
+                }
         """
         page = get(self.mirrors[0])
         soup = BeautifulSoup(page.text, "lxml")
         links = soup.find_all("a", string=MIRROR_SOURCES)
         download_links = {link.string: link["href"] for link in links}
+        download_links["cover"] = self.mirrors[0].split("/main")[0] + soup.find("img", {"alt": "cover"}).get("src")
         return download_links
     
     def download(self) -> bytes:
