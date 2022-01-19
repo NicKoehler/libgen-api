@@ -47,11 +47,11 @@ class SearchRequest:
         query_parsed = "%20".join(self.query.split(" "))
         if self.search_type.lower() == "title":
             search_url = (
-                f"http://libgen.is/search.php?req={query_parsed}&column=title"
+                f"http://libgen.is/search.php?req={query_parsed}&column=title&res=100"
             )
         elif self.search_type.lower() == "author":
             search_url = (
-                f"http://libgen.is/search.php?req={query_parsed}&column=author"
+                f"http://libgen.is/search.php?req={query_parsed}&column=author&res=100"
             )
         search_page = requests.get(search_url)
         return search_page

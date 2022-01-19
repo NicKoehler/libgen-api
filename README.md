@@ -208,7 +208,7 @@ edit: str,
 - All fields are strings.
 - If a value is not present, the field will contain an empty string.
 - Some listings will have page count listed in the form of "count[secondary-count]" as this is how they appear on Library Genesis.
-- Only the first page of results (max. 25) will be returned.
+- Only the first page of results (max. 100) will be returned.
 
 ## Testing
 
