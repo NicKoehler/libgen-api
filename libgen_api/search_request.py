@@ -27,8 +27,6 @@ class SearchRequest:
         "mirror_2",
         "mirror_3",
         "mirror_4",
-        "mirror_5",
-        "edit",
     ]
 
     def __init__(self, query, search_type="title"):

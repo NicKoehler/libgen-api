@@ -199,7 +199,6 @@ language: str,
 size: str,
 extension: str,
 mirrors: list[str],
-edit: str,
 ```
 
 ## Further information

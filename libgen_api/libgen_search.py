@@ -75,7 +75,7 @@ def check_filter(filter: dict):
     """
     reise error if filter is not a dict or if any of the keys are not in SearchRequest.col_names
     """
-    valid_filters = SearchRequest.col_names[:-6]
+    valid_filters = SearchRequest.col_names[:-4]
 
     if not isinstance(filter, dict):
         raise ValueError("Filter must be a dict.")

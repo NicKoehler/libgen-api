@@ -6,7 +6,7 @@ with open("README.md", encoding="utf-8") as fh:
 setuptools.setup(
     name="libgen_api",
     packages=["libgen_api"],
-    version="1.1.1",
+    version="1.1.2",
     description="Search Library genesis by Title or Author",
     long_description_content_type="text/markdown",
     long_description=long_description,
