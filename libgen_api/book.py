@@ -20,6 +20,7 @@ class Book():
         size: str,
         extension: str,
         mirrors: list[str],
+        edit: str,
     ) -> None:
         self.id = id
         self.author = author
@@ -31,6 +32,7 @@ class Book():
         self.size = size
         self.extension = extension
         self.mirrors = mirrors
+        self.edit = edit
 
     def get_download_links(self) -> dict[str:str]:
         """
@@ -92,8 +94,8 @@ class Book():
                     item["mirror_1"],
                     item["mirror_2"],
                     item["mirror_3"],
-                    item["mirror_4"],
                 ],
+                edit=item["edit"],
             ) for item in books_dict
         ]
 
