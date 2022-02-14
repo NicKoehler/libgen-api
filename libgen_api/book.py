@@ -56,7 +56,11 @@ class Book():
         soup = BeautifulSoup(page.text, "lxml")
         links = soup.find_all("a", string=MIRROR_SOURCES)
         download_links = {link.string: link["href"] for link in links}
-        download_links["cover"] = self.mirrors[0].split("/main")[0] + soup.find("img", {"alt": "cover"}).get("src")
+        cover = soup.find("img", {"alt": "cover"}).get("src")
+        if cover.startswith("http"):
+            download_links["cover"] = cover
+        else:
+            download_links["cover"] = self.mirrors[0].split("/main")[0] + cover
         return download_links
     
     def download(self) -> bytes:
